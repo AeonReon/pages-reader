@@ -1,0 +1,64 @@
+Pages Reader
+============
+
+Open Apple Pages (.pages) documents on any Mac (or any browser),
+without needing the Pages app installed.
+
+How it works
+------------
+.pages files are zip archives. Newer Pages saves a Preview.pdf
+inside the archive (so iWork can show a thumbnail in Finder).
+This app:
+  1. Accepts a .pages file via drag/drop or file picker
+  2. Unzips it client-side using JSZip
+  3. Pulls out Preview.pdf (or QuickLook/Preview.pdf, or preview.jpg)
+  4. Renders it in an <embed> for native PDF viewing
+  5. Offers a "Save as PDF" button so you can keep it
+
+Everything happens locally in the browser — the document is
+never uploaded anywhere.
+
+Format coverage
+---------------
+- Newer .pages (iWork '13+): Preview.pdf at root  ✓
+- Older .pages (iWork '09):  QuickLook/Preview.pdf ✓
+- Stripped (no preview):      preview.jpg fallback  ✓
+- No preview at all:           helpful error with fix suggestion
+
+Also accepts .key (Keynote) and .numbers (Numbers) since they
+share the same format.
+
+Stack
+-----
+- Vanilla HTML/CSS/JS (no build step)
+- JSZip 3.10.1 vendored at /vendor/jszip.min.js
+- PWA: manifest.json + sw.js (network-first for HTML)
+- Deploy: Vercel (AeonReon team), stateless
+
+Deploy
+------
+GitHub: AeonReon/pages-reader
+Vercel: aeonreon team
+
+Local dev
+---------
+Any static server. Suggested:
+  python3 -m http.server 8000
+
+Open http://localhost:8000
+
+Files
+-----
+index.html            — the whole app
+vendor/jszip.min.js   — zip extraction (vendored, ~95KB)
+manifest.json         — PWA manifest with .pages file_handler
+sw.js                 — service worker (cache-first for assets)
+vercel.json           — cache headers + clean URLs
+images/               — app icons (favicon, apple-touch, 192, 512, maskable)
+
+Roadmap (Wave 4 candidates)
+---------------------------
+- "Open with" association on macOS via file_handler API
+- Multi-file batch mode (drop several .pages files at once)
+- Extract embedded images from index.xml (when no preview is present)
+- Try parsing .iwa protobuf for very-stripped files (complex; only if user hits this)

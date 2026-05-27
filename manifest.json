@@ -1,0 +1,23 @@
+{
+  "name": "Pages Reader",
+  "short_name": "Pages Reader",
+  "description": "Open Apple Pages documents on any Mac — no Pages app required.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4ECDF",
+  "theme_color": "#F4ECDF",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/images/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "application/x-iwork-pages-sffpages": [".pages"]
+      }
+    }
+  ]
+}
