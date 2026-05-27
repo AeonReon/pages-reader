@@ -1,9 +1,15 @@
-const CACHE = 'pages-reader-v1';
+const CACHE = 'pages-reader-v2';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/vendor/jszip.min.js',
+  '/vendor/pako/pako_inflate.min.js',
+  '/vendor/pdfjs/pdf.min.js',
+  '/vendor/pdfjs/pdf.worker.min.js',
+  '/src/extractor.js',
+  '/src/converters.js',
+  '/src/app.js',
   '/images/icon-192.png',
   '/images/icon-512.png',
   '/images/apple-touch-icon.png',
